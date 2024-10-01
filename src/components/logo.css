@@ -1,0 +1,55 @@
+.parent {
+  width: 40px; /* Further reduced width */
+  height: 50px; /* Further reduced height */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem; /* Reduced gap */
+  position: relative;
+  box-shadow: 6px 4px 8px rgba(201, 10, 10, 0.8); /* Horizontal offset, vertical offset, blur radius, color */
+}
+
+.eye1 {
+  width: 15px; /* Further reduced width */
+  height: 15px; /* Further reduced height */
+  border-radius: 50%;
+  background: red;
+  z-index: 4;
+  position: relative;
+}
+
+.eye2 {
+  width: 15px; /* Further reduced width */
+  height: 15px; /* Further reduced height */
+  border-radius: 50%;
+  background: red;
+  z-index: 4;
+  position: relative;
+}
+
+.eye1::before {
+  position: absolute;
+  top: -0.3rem; /* Adjusted position */
+  right: -3px; /* Adjusted position */
+  content: "";
+  display: block;
+  width: 15px; /* Further reduced width */
+  height: 15px; /* Further reduced height */
+  transform: rotate(35deg); /* Updated from rotate */
+  background: #fff;
+  z-index: -1;
+}
+
+.eye2::before {
+  position: absolute;
+  top: -0.3rem; /* Adjusted position */
+  left: -3px; /* Adjusted position */
+  content: "";
+  display: block;
+  width: 15px; /* Further reduced width */
+  height: 15px; /* Further reduced height */
+  transform: rotate(-35deg); /* Updated from rotate */
+  background: #fff;
+  z-index: -1;
+}
