@@ -26,13 +26,15 @@ const useStore = create((set) => ({
   data: data,
 
   // Unique product management with localStorage
-  uniqueProduct: JSON.parse(localStorage.getItem("uniqueProduct")) || "",
+  // Store uniqueProduct in localStorage and set it in Zustand store
   setUniqueProduct: (product) => {
     localStorage.setItem("uniqueProduct", JSON.stringify(product));
+
+    // First, set the uniqueProduct in Zustand state
     set({ uniqueProduct: product });
-    set((state) => ({
-      detailImg: state.uniqueProduct.productImg, // Now you can safely access uniqueProduct
-    }));
+
+    // After setting uniqueProduct, safely update the detailImg
+    set({ detailImg: product.productImg });
   },
 
   // Detail image functionality

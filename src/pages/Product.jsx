@@ -30,6 +30,8 @@ const Product = () => {
       return a.productPrice - b.productPrice;
     } else if (sortOption === "rating") {
       return b.productStarRating - a.productStarRating;
+    } else if (sortOption === "default") {
+      return 0;
     } else {
       return 0;
     }

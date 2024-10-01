@@ -10,12 +10,9 @@ import {
   Img,
   Text,
   Button,
-  Heading,
 } from "@chakra-ui/react";
 import { useStore } from "../zustand/Store";
 
-import ProductCount from "../components/ProductCount";
-import { useEffect, useState } from "react";
 const Cart = () => {
   const { productCounts, handleCountIncrement, handleCountDecrement } =
     useStore();
@@ -35,16 +32,16 @@ const Cart = () => {
       flexDir="column"
       align="center"
       justify="center"
-      minW="100vw"
+      w="full"
       minH="100vh"
       bg="#fff"
-      p={8}
+      // p={8}
     >
       {cartArray.length === 0 ? (
         <Text fontSize="xl">Your cart is empty.</Text>
       ) : (
-        <TableContainer w="80%" overflow="hidden">
-          <Table variant="simple">
+        <TableContainer w={{ base: "100%", md: "80%" }} overflowX="auto">
+          <Table variant="striped" size={{ base: "sm", md: "md", lg: "lg" }}>
             <Thead color="#fff" bg="#e65833">
               <Tr>
                 <Th color="#fff">Product</Th>
@@ -56,49 +53,52 @@ const Cart = () => {
               {cartArray.map((item, index) => (
                 <Tr key={index}>
                   <Td>
-                    <Flex align="center">
+                    <Flex
+                      flexDir={{
+                        base: "column",
+                        md: "row",
+                      }}
+                      align={{ base: "start", md: "center" }}
+                    >
                       <Img
                         w="4rem"
                         h="6rem"
                         src={item.productImg}
                         alt={item.productName}
                       />
-                      <Flex flexDir="column">
-                        <Text ml={4}>{item.productName}</Text>
-                        <Text ml={4}> Price ${item.productPrice}</Text>
-                        <Button
+                      <Flex flexDir="column" ml={{ base: 0, md: 4 }}>
+                        <Text>{item.productName}</Text>
+                        <Text>Price ${item.productPrice}</Text>
+                        <Text
                           w="6rem"
-                          bg="#fff"
                           fontWeight="100"
                           color="#e65833"
+                          cursor="pointer"
                           _hover={{
-                            bg: "#fff",
-                            border: "1px solid",
+                            textDecoration: "underline",
                           }}
-                          _active={{ border: "none" }}
-                          _focus={{ border: "none" }}
                         >
                           Remove
-                        </Button>
+                        </Text>
                       </Flex>
                     </Flex>
                   </Td>
                   <Td>
-                    <Flex key={index} align="center">
+                    <Flex align="center">
                       <Button
                         onClick={() => handleCountDecrement(item.id)}
                         isDisabled={productCounts[item.id] <= 1}
+                        size={{ base: "xs", md: "sm" }}
                       >
                         -
                       </Button>
                       <Text mx={2}>{productCounts[item.id] || 1}</Text>
                       <Button
-                        onClick={() => {
-                          handleCountIncrement(item.id);
-                        }}
+                        onClick={() => handleCountIncrement(item.id)}
                         isDisabled={
-                          productCounts[item.id] == item.productAvailable
+                          productCounts[item.id] === item.productAvailable
                         }
+                        size={{ base: "xs", md: "sm" }}
                       >
                         +
                       </Button>
@@ -106,8 +106,9 @@ const Cart = () => {
                   </Td>
                   <Td>
                     $
-                    {item.productPrice *
-                      (productCounts[item.id] || 1).toFixed(2)}
+                    {(
+                      item.productPrice * (productCounts[item.id] || 1)
+                    ).toFixed(2)}
                   </Td>
                 </Tr>
               ))}

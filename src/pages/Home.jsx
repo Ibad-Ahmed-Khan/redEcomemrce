@@ -18,6 +18,7 @@ const Home = () => {
   return (
     <SimpleGrid
       columns={{ base: 1, md: 2, lg: 2 }}
+      minH="100vh"
       paddingInline="4rem"
       alignItems="center"
       justifyContent="end"

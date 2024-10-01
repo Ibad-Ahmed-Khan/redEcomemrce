@@ -25,7 +25,7 @@ const Header = () => {
 
   const { hamburger, handleHamburger } = useStore();
   return (
-    <Box zIndex="99999" pos="sticky" top="0" w="100vw" bg="#fee4eb">
+    <Box zIndex="99999" pos="sticky" top="0" w="99vw" bg="#fee4eb">
       <SimpleGrid alignItems="center" columns="2" p="4">
         <Flex>
           <RouterLink to="/">
