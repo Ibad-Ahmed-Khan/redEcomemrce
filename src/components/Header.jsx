@@ -5,6 +5,7 @@ import {
   Image,
   Img,
   SimpleGrid,
+  Text,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import Cart from "../assets/RedStore_Img/images/cart.png";
@@ -20,10 +21,9 @@ const Header = () => {
     { link: "About", to: "/about" },
     { link: "Contact", to: "/contact" },
     { link: "Account", to: "/account" },
-    { link: "Cart", to: "/cart" },
   ];
 
-  const { hamburger, handleHamburger } = useStore();
+  const { hamburger, handleHamburger, cartArray } = useStore();
   return (
     <Box zIndex="99999" pos="sticky" top="0" w="99vw" bg="#fee4eb">
       <SimpleGrid alignItems="center" columns="2" p="4">
@@ -45,7 +45,27 @@ const Header = () => {
               </Flex>
             );
           })}
-          <Img w="1.5rem" cursor="pointer" src={Cart} />
+          <RouterLink to="/cart">
+            <Box pos="relative">
+              <Flex
+                pos="absolute"
+                top="-.7rem"
+                right="-.7rem"
+                // bg="#fff"
+                boxShadow="0 4px 8px rgba(255, 105, 180, 0.5);"
+                fontSize=".7rem"
+                fontWeight="bold"
+                w="1.2rem"
+                h="1.2rem"
+                borderRadius="50%"
+                align="center"
+                justify="center"
+              >
+                {cartArray.length}
+              </Flex>
+            </Box>
+            <Img w="1.5rem" cursor="pointer" src={Cart} />
+          </RouterLink>
         </Flex>
         <Image
           cursor="pointer"
@@ -102,7 +122,27 @@ const Header = () => {
             </Flex>
           );
         })}
-        <Img w="1.5rem" cursor="pointer" src={Cart} />
+        <RouterLink to="/cart">
+          <Box pos="relative">
+            <Flex
+              pos="absolute"
+              top="-.7rem"
+              right="-.7rem"
+              // bg="#fff"
+              boxShadow="0 4px 8px rgba(255, 105, 180, 0.5);"
+              fontSize=".7rem"
+              fontWeight="bold"
+              w="1.2rem"
+              h="1.2rem"
+              borderRadius="50%"
+              align="center"
+              justify="center"
+            >
+              {cartArray.length}
+            </Flex>
+          </Box>
+          <Img w="1.5rem" cursor="pointer" src={Cart} />
+        </RouterLink>
       </Flex>
     </Box>
   );

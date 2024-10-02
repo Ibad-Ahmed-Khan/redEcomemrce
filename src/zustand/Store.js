@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import productList from "../data/ProductList";
 import data from "../data/DropDownData";
+
+import productList from "../data/ProductList";
 
 const useStore = create((set) => ({
   // hamburger
@@ -21,35 +22,37 @@ const useStore = create((set) => ({
   sortOption: "",
   setSortOption: (option) => set({ sortOption: option }),
 
-  // All Data
-  productList: productList,
+  // productList: productList,
   data: data,
+  productList: productList,
 
   // Unique product management with localStorage
   // Store uniqueProduct in localStorage and set it in Zustand store
-  setUniqueProduct: (product) => {
-    localStorage.setItem("uniqueProduct", JSON.stringify(product));
-
-    // First, set the uniqueProduct in Zustand state
-    set({ uniqueProduct: product });
-
-    // After setting uniqueProduct, safely update the detailImg
-    set({ detailImg: product.productImg });
-  },
 
   // Detail image functionality
-  setDetailImg: (selectedImg) => set({ detailImg: selectedImg }),
+  detailFirsImg: null,
+
+  // Function to set the detailFirsImg in Zustand
+  setDetailFirsImg: (img) => set({ detailFirsImg: img }),
+
+  // Load initial image when the product is set
+  setUniqueProduct: (product) => {
+    localStorage.setItem("uniqueProduct", JSON.stringify(product));
+    set({
+      uniqueProduct: product,
+      detailImg: product.productImg,
+      detailFirsImg: product.productImg, // Set the first image
+    });
+  },
 
   // Storing Ids from uniqueProduct/details to show product to cart page
 
-  cartArray: [],
+  cartArray: JSON.parse(localStorage.getItem("cartArrayData")) || [],
   handleCartArray: () =>
     set((state) => {
       const uniqueProduct = state.uniqueProduct; // Access uniqueProduct from the state
       if (!uniqueProduct) return state; // Early return if uniqueProduct is undefined
-
       const updatedCartArray = [...state.cartArray];
-
       // Function to check if product already exists in cart
       const productExists = updatedCartArray.some(
         (item) => item.id === uniqueProduct.id
@@ -67,6 +70,17 @@ const useStore = create((set) => ({
           cartArray: updatedCartArray,
         };
       }
+    }),
+
+  // DELETE BUTTON IN CART
+
+  handleRemoveFromCart: (id) =>
+    set((state) => {
+      const updatedCartArray = state.cartArray.filter((item) => item.id !== id);
+      localStorage.setItem("cartArrayData", JSON.stringify(updatedCartArray));
+      return {
+        cartArray: updatedCartArray,
+      };
     }),
 
   // productCount funtions are below

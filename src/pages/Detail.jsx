@@ -3,69 +3,45 @@ import {
   Button,
   Flex,
   Heading,
-  Image,
   Img,
-  Input,
-  Select,
   SimpleGrid,
   Text,
   VStack,
 } from "@chakra-ui/react";
 import { useStore } from "../zustand/Store";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import { useEffect } from "react";
 import DropDown from "../components/DropDown";
 import RelatedProduct from "../components/RelatedProduct";
-
 import ProductCount from "../components/ProductCount";
 
+import { Link as RouterLink } from "react-router-dom";
+
 const Detail = () => {
-  const {
-    detailImg,
-    setDetailImg,
-    productList,
-    uniqueProduct,
-    setUniqueProduct,
-    cartArray,
-    handleCartArray,
-  } = useStore();
-  const { productId } = useParams(); // Get the product ID from the URL
+  const { detailFirsImg, setDetailFirsImg, setUniqueProduct, handleCartArray } =
+    useStore();
 
+  // Load unique product from localStorage
+  const uniqueProduct = JSON.parse(localStorage.getItem("uniqueProduct"));
+
+  // If uniqueProduct exists, ensure that detailFirsImg is set when the page reloads
   useEffect(() => {
-    // Check if there's a product in localStorage
-    const storedProduct = localStorage.getItem("selectedProduct");
-    const storedDetailImg = localStorage.getItem("detailImg");
-
-    if (storedProduct) {
-      // If a product exists in localStorage, set it in Zustand store
-      setUniqueProduct(JSON.parse(storedProduct));
-    } else {
-      // If no product in localStorage, find it in the productList
-      const selectedProduct = productList.find((p) => p.id === productId);
-      if (selectedProduct) {
-        setUniqueProduct(selectedProduct);
-        localStorage.setItem(
-          "selectedProduct",
-          JSON.stringify(selectedProduct)
-        ); // Store in localStorage
-      }
+    if (uniqueProduct && !detailFirsImg) {
+      setDetailFirsImg(uniqueProduct.productImg); // Set the first image from uniqueProduct
     }
-    if (storedDetailImg) {
-      setDetailImg(storedDetailImg);
-    }
-  }, []);
+  }, [uniqueProduct, detailFirsImg, setDetailFirsImg]);
 
-  // Log uniqueProduct to see its value after page reloads
-  useEffect(() => {
-    // console.log(uniqueProduct, detailImg);
-  }, [uniqueProduct]);
-
-  useEffect(() => {
-    if (uniqueProduct && detailImg) {
-      localStorage.setItem("detailImg", detailImg);
-    }
-  }, [uniqueProduct, detailImg]);
+  // Use default values to prevent rendering issues
+  const product = uniqueProduct || {
+    productShortName: "Unknown",
+    productName: "Product Not Found",
+    productPrice: "N/A",
+    productDetail: "",
+    detailImg1: "",
+    detailImg2: "",
+    detailImg3: "",
+    detailImg4: "",
+  };
 
   return (
     <SimpleGrid
@@ -90,7 +66,7 @@ const Detail = () => {
               maxW="22rem"
               minH="30rem"
               maxH="30rem"
-              src={detailImg}
+              src={detailFirsImg}
             />
           </Box>
           <Flex
@@ -106,11 +82,8 @@ const Detail = () => {
               minH="6rem"
               maxH="6rem"
               objectFit="cover"
-              src={uniqueProduct.detailImg1}
-              onClick={(e) => {
-                e.preventDefault();
-                setDetailImg(uniqueProduct?.detailImg1);
-              }}
+              src={product.detailImg1}
+              onClick={() => setDetailFirsImg(product?.detailImg1)} // Use Zustand setter
             />
             <Img
               cursor="pointer"
@@ -119,11 +92,8 @@ const Detail = () => {
               minH="6rem"
               maxH="6rem"
               objectFit="cover"
-              src={uniqueProduct.detailImg2}
-              onClick={(e) => {
-                e.preventDefault();
-                setDetailImg(uniqueProduct.detailImg2);
-              }}
+              src={product.detailImg2}
+              onClick={() => setDetailFirsImg(product?.detailImg2)} // Use Zustand setter
             />
             <Img
               cursor="pointer"
@@ -132,11 +102,8 @@ const Detail = () => {
               minH="6rem"
               maxH="6rem"
               objectFit="cover"
-              src={uniqueProduct.detailImg3}
-              onClick={(e) => {
-                e.preventDefault();
-                setDetailImg(uniqueProduct?.detailImg3);
-              }}
+              src={product.detailImg3}
+              onClick={() => setDetailFirsImg(product?.detailImg3)} // Use Zustand setter
             />
             <Img
               cursor="pointer"
@@ -145,11 +112,8 @@ const Detail = () => {
               minH="6rem"
               maxH="6rem"
               objectFit="cover"
-              src={uniqueProduct.detailImg4}
-              onClick={(e) => {
-                e.preventDefault();
-                setDetailImg(uniqueProduct?.detailImg4);
-              }}
+              src={product.detailImg4}
+              onClick={() => setDetailFirsImg(product?.detailImg4)} // Use Zustand setter
             />
           </Flex>
         </Flex>
@@ -167,23 +131,25 @@ const Detail = () => {
           align={{ base: "center", md: "center", lg: "start", xl: "start" }}
           justify={{ base: "center", md: "center", lg: "start", xl: "start" }}
         >
-          <Text>{uniqueProduct.productShortName} </Text>
-          <Heading>{uniqueProduct.productName}</Heading>
-          <Text>{uniqueProduct.productPrice}</Text>
+          <Text>{product.productShortName}</Text>
+          <Heading>{product.productName}</Heading>
+          <Text>{product.productPrice}</Text>
           <DropDown />
           <Flex align="center" justify="center" gap="1rem" pt="3rem">
             <ProductCount />
-            <Button
-              w="10rem"
-              color="#fff"
-              bg="#e65833"
-              _hover={{ bg: "#e65833" }}
-              _active={{ bg: "#e63113", border: "none", outline: "none" }}
-              borderRadius="4rem"
-              onClick={() => handleCartArray()}
-            >
-              Add to Cart
-            </Button>
+            <RouterLink to="/cart">
+              <Button
+                w="10rem"
+                color="#fff"
+                bg="#e65833"
+                _hover={{ bg: "#e65833" }}
+                _active={{ bg: "#e63113", border: "none", outline: "none" }}
+                borderRadius="4rem"
+                onClick={() => handleCartArray()}
+              >
+                Add to Cart
+              </Button>
+            </RouterLink>
           </Flex>
           <Text
             fontSize="1rem"
@@ -191,9 +157,9 @@ const Detail = () => {
             textTransform="uppercase"
             fontWeight="bolder"
           >
-            Products Deatils
+            Product Details
           </Text>
-          <Text>{uniqueProduct.productDetail}</Text>
+          <Text>{product.productDetail}</Text>
         </VStack>
       </Flex>
       <RelatedProduct />

@@ -10,22 +10,26 @@ import {
   Img,
   Text,
   Button,
+  Heading,
 } from "@chakra-ui/react";
 import { useStore } from "../zustand/Store";
+import { useEffect } from "react";
 
 const Cart = () => {
-  const { productCounts, handleCountIncrement, handleCountDecrement } =
-    useStore();
+  const {
+    handleRemoveFromCart,
+    productCounts,
+    handleCountIncrement,
+    handleCountDecrement,
+    // cartArray, // Use cartArray directly from Zustand store
+  } = useStore();
+
   const cartArray = JSON.parse(localStorage.getItem("cartArrayData")) || [];
 
-  // useEffect(() => {
-  //   cartArray.forEach((item) => {
-  //     const currentCount = productCounts[item.id] || 1;
-  //     if (currentCount >= item.productAvailable) {
-  //       alert(`${item.productName} stock will be available soon.`);
-  //     }
-  //   });
-  // }, [productCounts]);
+  // Effect to sync cartArray with localStorage
+  useEffect(() => {
+    localStorage.setItem("cartArrayData", JSON.stringify(cartArray));
+  }, [cartArray]); // Runs whenever cartArray changes
 
   return (
     <Flex
@@ -35,7 +39,7 @@ const Cart = () => {
       w="full"
       minH="100vh"
       bg="#fff"
-      // p={8}
+      paddingBlock="2rem"
     >
       {cartArray.length === 0 ? (
         <Text fontSize="xl">Your cart is empty.</Text>
@@ -67,7 +71,12 @@ const Cart = () => {
                         alt={item.productName}
                       />
                       <Flex flexDir="column" ml={{ base: 0, md: 4 }}>
-                        <Text>{item.productName}</Text>
+                        <Text
+                          w="full" // Ensure the Text takes the full width
+                          whiteSpace="normal" // Allow wrapping of text
+                        >
+                          {item.productName}
+                        </Text>
                         <Text>Price ${item.productPrice}</Text>
                         <Text
                           w="6rem"
@@ -77,6 +86,7 @@ const Cart = () => {
                           _hover={{
                             textDecoration: "underline",
                           }}
+                          onClick={() => handleRemoveFromCart(item.id)} // Pass the item id to handleRemoveFromCart
                         >
                           Remove
                         </Text>

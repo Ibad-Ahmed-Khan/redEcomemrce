@@ -2,6 +2,7 @@ const data = [
   {
     id: 1,
     name: "default",
+    value: "default",
   },
   {
     id: 2,

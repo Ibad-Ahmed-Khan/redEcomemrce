@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const DropDown = () => {
   const { productList, sortOption, setSortOption, hover, handleHover } =
     useStore();
-  const [name, setName] = useState("Default");
+  const [name, setName] = useState("default");
   const data = JSON.parse(localStorage.getItem("2"));
 
   return (
@@ -58,6 +58,7 @@ const DropDown = () => {
                 value={item.value}
                 onChange={(e) => setSortOption(e.target.value)}
                 _hover={{ color: "#fff", bg: "gray", cursor: "pointer" }}
+                whiteSpace="nowrap"
                 onClick={() => {
                   setName(item.name);
                   setSortOption(item.value);

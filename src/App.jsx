@@ -17,10 +17,8 @@ function App() {
   const { productList, data } = useStore();
 
   useEffect(() => {
-    if (productList && productList.length > 0) {
-      localStorage.setItem("1", JSON.stringify(productList));
-    }
-  }, [productList]); // Run the effect when productList changes
+    localStorage.setItem("1", JSON.stringify(productList));
+  }, [productList]);
 
   // useEffect(() => {
   // }, [data]);
