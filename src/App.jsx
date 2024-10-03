@@ -27,23 +27,25 @@ function App() {
   // localStorage.setItem("test", JSON.stringify(data));
 
   return (
-    <BrowserRouter>
-      <Box bgGradient="radial(white, pink.100)">
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/detail" element={<Detail />} />
-        </Routes>
-        {/* <Cards /> */}
-        <Footer />
-        {/* <SmartBrand /> */}
-      </Box>
-    </BrowserRouter>
+    <Box w="100vw">
+      <BrowserRouter>
+        <Box bgGradient="radial(white, pink.100)">
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/detail" element={<Detail />} />
+          </Routes>
+          {/* <Cards /> */}
+          <Footer />
+          {/* <SmartBrand /> */}
+        </Box>
+      </BrowserRouter>
+    </Box>
   );
 }
 

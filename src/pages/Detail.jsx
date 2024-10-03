@@ -45,14 +45,13 @@ const Detail = () => {
 
   return (
     <SimpleGrid
-      paddingInline="1rem"
+      border="3px solid red"
       bg="#fff"
       alignItems="center"
       justifyContent="center"
       columns={{ base: "1", md: "1", lg: "2", xl: "2" }}
       minH="100vh"
       gap="2rem"
-      w="100vw"
     >
       <Flex
         align="center"
