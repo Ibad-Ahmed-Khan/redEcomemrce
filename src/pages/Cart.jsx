@@ -11,15 +11,19 @@ import {
   Text,
   Button,
   Heading,
+  Box,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { useStore } from "../zustand/Store";
 import { useEffect } from "react";
+import { Link as RouterLink } from "react-router-dom";
 
 const Cart = () => {
   const {
     handleRemoveFromCart,
     productCounts,
     handleCountIncrement,
+    setUniqueProduct,
     handleCountDecrement,
     // cartArray, // Use cartArray directly from Zustand store
   } = useStore();
@@ -30,6 +34,8 @@ const Cart = () => {
   useEffect(() => {
     localStorage.setItem("cartArrayData", JSON.stringify(cartArray));
   }, [cartArray]); // Runs whenever cartArray changes
+
+  const products = JSON.parse(localStorage.getItem("1"));
 
   return (
     <Flex
@@ -45,12 +51,14 @@ const Cart = () => {
         <Text fontSize="xl">Your cart is empty.</Text>
       ) : (
         <TableContainer w={{ base: "100%", md: "80%" }} overflowX="auto">
-          <Table variant="striped" size={{ base: "sm", md: "md", lg: "lg" }}>
+          <Table variant="normal" size={{ base: "sm", md: "md", lg: "lg" }}>
             <Thead color="#fff" bg="#e65833">
               <Tr>
                 <Th color="#fff">Product</Th>
                 <Th color="#fff">Quantity</Th>
-                <Th color="#fff">Subtotal</Th>
+                <Th color="#fff" textAlign="end">
+                  Subtotal
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -67,6 +75,8 @@ const Cart = () => {
                       <Img
                         w="4rem"
                         h="6rem"
+                        objectFit="cover"
+                        cursor="pointer"
                         src={item.productImg}
                         alt={item.productName}
                       />
@@ -114,7 +124,7 @@ const Cart = () => {
                       </Button>
                     </Flex>
                   </Td>
-                  <Td>
+                  <Td textAlign="end">
                     $
                     {(
                       item.productPrice * (productCounts[item.id] || 1)
@@ -122,6 +132,80 @@ const Cart = () => {
                   </Td>
                 </Tr>
               ))}
+              {/* Horizontal line under Quantity and Subtotal only */}
+              <Table
+                variant="normal"
+                size={{ base: "sm", md: "md", lg: "lg" }}
+              ></Table>
+              <Tr>
+                <Td></Td>
+                <Td colSpan={2}>
+                  <Box borderTop="3px solid #e65833" my={4}></Box>
+                </Td>
+              </Tr>
+
+              {/* Subtotal Row */}
+              <Tr>
+                <Td></Td>
+                <Td colSpan={2}>
+                  <Flex justify="space-between">
+                    <Text fontWeight="bold">Subtotal</Text>
+                    <Text fontWeight="bold">
+                      $
+                      {cartArray
+                        .reduce(
+                          (total, item) =>
+                            total +
+                            item.productPrice * (productCounts[item.id] || 1),
+                          0
+                        )
+                        .toFixed(2)}
+                    </Text>
+                  </Flex>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td></Td>
+                <Td colSpan={2}>
+                  <Flex justify="space-between">
+                    <Text fontWeight="bold">Tax</Text>
+                    <Text fontWeight="bold">$10.00</Text>
+                  </Flex>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td></Td>
+                <Td colSpan={2}>
+                  <Flex justify="space-between">
+                    <Text fontWeight="bold">Total</Text>
+                    <Text fontWeight="bold">
+                      $
+                      {cartArray
+                        .reduce(
+                          (total, item) =>
+                            total +
+                            item.productPrice * (productCounts[item.id] || 1),
+                          +10
+                        )
+                        .toFixed(2)}
+                    </Text>
+                  </Flex>
+                </Td>
+              </Tr>
+              <Tr>
+                <Td></Td>
+                <Td colSpan={2} textAlign="end">
+                  <Button
+                    color="#fff"
+                    bg="#e65833"
+                    borderRadius="7rem"
+                    _hover={{ bg: "#e65833" }}
+                    _active={{ color: "#e65833", bg: "#fff" }}
+                  >
+                    Proceed to checkout
+                  </Button>
+                </Td>
+              </Tr>
             </Tbody>
           </Table>
         </TableContainer>
