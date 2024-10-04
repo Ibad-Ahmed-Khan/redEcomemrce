@@ -13,6 +13,7 @@ import Logo from "../assets/RedStore_Img/images/logo.png";
 import Hamburger from "../assets/RedStore_Img/images/menu.png";
 import { useStore } from "../zustand/Store";
 import { AiOutlineClose } from "react-icons/ai";
+import { useState } from "react";
 
 const Header = () => {
   const links = [
@@ -23,12 +24,26 @@ const Header = () => {
     { link: "Account", to: "/account" },
   ];
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const [click, setClick] = useState(false);
+
+  const handleCLick = () => {
+    setClick(!click);
+    console.log(click);
+  };
+
   const { hamburger, handleHamburger, cartArray } = useStore();
   return (
     <Box zIndex="99999" pos="sticky" top="0" bg="#fee4eb">
       <SimpleGrid alignItems="center" columns="2" p="4">
         <Flex>
-          <RouterLink to="/">
+          <RouterLink onClick={scrollToTop} to="/">
             <Img w="7rem" src={Logo} />
           </RouterLink>
         </Flex>
@@ -41,11 +56,19 @@ const Header = () => {
           {links.map((item, index) => {
             return (
               <Flex key={index}>
-                <RouterLink to={item.to}>{item.link}</RouterLink>
+                <RouterLink onClick={scrollToTop} to={item.to}>
+                  <Box
+                    className="bar"
+                    opacity="0"
+                    w="0.6rem"
+                    border="2px solid #e65833"
+                  />
+                  {item.link}
+                </RouterLink>
               </Flex>
             );
           })}
-          <RouterLink to="/cart">
+          <RouterLink onClick={scrollToTop} to="/cart">
             <Box pos="relative">
               <Flex
                 pos="absolute"
@@ -94,7 +117,19 @@ const Header = () => {
         />
       </SimpleGrid>
       {/* mobile */}
+      <Box
+        pos="absolute"
+        // top="0"
+        bg="rgba(255, 255, 255, 0.1)"
+        backdropFilter="blur(2px)"
+        minW={hamburger ? "100%" : "0"}
+        minH={hamburger ? "10000%" : "0"}
+        transition="all .5s ease-in-out"
+        transformOrigin="top"
+        onClick={handleHamburger}
+      />
       <Flex
+        backdropFilter="blur(10px)"
         onClick={handleHamburger}
         zIndex="99999"
         pos="absolute"
@@ -118,11 +153,19 @@ const Header = () => {
         {links.map((item, index) => {
           return (
             <Flex key={index}>
-              <RouterLink to={item.to}>{item.link}</RouterLink>
+              <RouterLink
+                onClick={() => {
+                  scrollToTop();
+                  handleCLick();
+                }}
+                to={item.to}
+              >
+                {item.link}
+              </RouterLink>
             </Flex>
           );
         })}
-        <RouterLink to="/cart">
+        <RouterLink onClick={scrollToTop} to="/cart">
           <Box pos="relative">
             <Flex
               pos="absolute"

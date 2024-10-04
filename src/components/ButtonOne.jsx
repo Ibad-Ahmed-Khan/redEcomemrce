@@ -33,13 +33,14 @@ const ButtonOne = ({ buttonText }) => {
       color="#fff"
       bg="#e65833"
       borderRadius="7rem"
-      padding=".6rem 0.7rem"
       fontWeight="bold"
+      p={{ base: "1rem 1rem", lg: "1rem 1rem" }}
       boxShadow="0 4px 20px rgba(0, 0, 0, 0.2)"
       transition="transform 0.3s, box-shadow 0.3s, background 0.3s"
       cursor="pointer" // Change cursor to pointer
+      fontSize={{ base: "xm", md: "md" }}
       _hover={{
-        transform: "scale(1.05)",
+        transform: "scale(1)",
         boxShadow: "0 8px 30px rgba(230, 88, 51, 0.5)", // Change shadow color to #e65833
         // bg: "#fff", // Slightly darker on hover
         border: "1px solid #d45a2c",
@@ -61,14 +62,14 @@ const ButtonOne = ({ buttonText }) => {
       <Box
         opacity="0"
         className="arrow2"
-        mr="0.6rem"
+        mr="0.2rem"
         as={HiArrowNarrowRight}
         transition="transform 0.2s"
       />
       <Text>{buttonText}</Text>
       <Box
         className="arrow"
-        ml=".6rem"
+        ml=".2rem"
         as={HiArrowNarrowRight}
         transition="transform 0.2s"
       />
