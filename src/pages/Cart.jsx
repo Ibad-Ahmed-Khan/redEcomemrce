@@ -10,13 +10,10 @@ import {
   Img,
   Text,
   Button,
-  Heading,
   Box,
-  SimpleGrid,
 } from "@chakra-ui/react";
 import { useStore } from "../zustand/Store";
 import { useEffect } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import ButtonOne from "../components/ButtonOne";
 
@@ -25,9 +22,7 @@ const Cart = () => {
     handleRemoveFromCart,
     productCounts,
     handleCountIncrement,
-    setUniqueProduct,
     handleCountDecrement,
-    // cartArray, // Use cartArray directly from Zustand store
   } = useStore();
 
   const cartArray = JSON.parse(localStorage.getItem("cartArrayData")) || [];
@@ -37,8 +32,6 @@ const Cart = () => {
     localStorage.setItem("cartArrayData", JSON.stringify(cartArray));
   }, [cartArray]); // Runs whenever cartArray changes
 
-  const products = JSON.parse(localStorage.getItem("1"));
-
   return (
     <Flex
       flexDir="column"
@@ -47,7 +40,6 @@ const Cart = () => {
       w="full"
       minH="100vh"
       bg="#fff"
-      // paddingBlock="2rem"
     >
       {cartArray.length === 0 ? (
         <Text fontSize="xl">Your cart is empty.</Text>
@@ -83,10 +75,7 @@ const Cart = () => {
                         alt={item.productName}
                       />
                       <Flex flexDir="column" ml={{ base: 0, md: 4 }}>
-                        <Text
-                          w="full" // Ensure the Text takes the full width
-                          whiteSpace="normal" // Allow wrapping of text
-                        >
+                        <Text w="full" whiteSpace="normal">
                           {item.productName}
                         </Text>
                         <Text>Price ${item.productPrice}</Text>
@@ -98,7 +87,7 @@ const Cart = () => {
                           _hover={{
                             textDecoration: "underline",
                           }}
-                          onClick={() => handleRemoveFromCart(item.id)} // Pass the item id to handleRemoveFromCart
+                          onClick={() => handleRemoveFromCart(item.id)}
                         >
                           Remove
                         </Text>
@@ -140,11 +129,6 @@ const Cart = () => {
                   </Td>
                 </Tr>
               ))}
-              {/* Horizontal line under Quantity and Subtotal only */}
-              <Table
-                variant="normal"
-                size={{ base: "sm", md: "md", lg: "lg" }}
-              ></Table>
               <Tr>
                 <Td></Td>
                 <Td colSpan={2}>
@@ -160,14 +144,14 @@ const Cart = () => {
                     <Text fontWeight="bold">Subtotal</Text>
                     <Text fontWeight="bold">
                       $
-                      {cartArray
-                        .reduce(
+                      {(
+                        cartArray.reduce(
                           (total, item) =>
                             total +
                             item.productPrice * (productCounts[item.id] || 1),
                           0
-                        )
-                        .toFixed(2)}
+                        ) + 10
+                      ).toFixed(2)}
                     </Text>
                   </Flex>
                 </Td>
@@ -193,7 +177,7 @@ const Cart = () => {
                           (total, item) =>
                             total +
                             item.productPrice * (productCounts[item.id] || 1),
-                          +10
+                          10
                         )
                         .toFixed(2)}
                     </Text>

@@ -181,7 +181,7 @@ const Header = () => {
               align="center"
               justify="center"
             >
-              {cartArray.length}
+              {cartArray.length || 0}
             </Flex>
           </Box>
           <Img w="1.5rem" cursor="pointer" src={Cart} />

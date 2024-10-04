@@ -17,6 +17,7 @@ import ProductCount from "../components/ProductCount";
 
 import { Link as RouterLink } from "react-router-dom";
 import ButtonOne from "../components/ButtonOne";
+import DropDownTwo from "../components/DropDownTwo";
 
 const Detail = () => {
   const { detailFirsImg, setDetailFirsImg, setUniqueProduct, handleCartArray } =
@@ -42,6 +43,13 @@ const Detail = () => {
     detailImg2: "",
     detailImg3: "",
     detailImg4: "",
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -133,10 +141,16 @@ const Detail = () => {
           <Text>{product.productShortName}</Text>
           <Heading>{product.productName}</Heading>
           <Text>{product.productPrice}</Text>
-          <DropDown />
+          <DropDownTwo />
           <Flex align="center" justify="center" gap="1rem" pt="3rem">
             <ProductCount />
-            <RouterLink to="/cart" onClick={() => handleCartArray()}>
+            <RouterLink
+              to="/cart"
+              onClick={() => {
+                handleCartArray();
+                scrollToTop();
+              }}
+            >
               <ButtonOne buttonText="Add to Cart" />
             </RouterLink>
           </Flex>

@@ -18,9 +18,18 @@ const useStore = create((set) => ({
       hover: !state.hover,
     })),
 
+  hover2: false,
+  handleHover2: () =>
+    set((state) => ({
+      hover2: !state.hover2,
+    })),
+
   // Sorting functionality
   sortOption: "",
   setSortOption: (option) => set({ sortOption: option }),
+
+  sortOption2: "",
+  setSortOption2: (option) => set({ sortOption2: option }),
 
   // productList: productList,
   data: data,

@@ -34,7 +34,7 @@ const ButtonOne = ({ buttonText }) => {
       bg="#e65833"
       borderRadius="7rem"
       fontWeight="bold"
-      p={{ base: "1rem 1rem", lg: "1rem 1rem" }}
+      p={{ base: "1rem 0.5rem", lg: "1rem 1rem" }}
       boxShadow="0 4px 20px rgba(0, 0, 0, 0.2)"
       transition="transform 0.3s, box-shadow 0.3s, background 0.3s"
       cursor="pointer" // Change cursor to pointer
@@ -60,6 +60,7 @@ const ButtonOne = ({ buttonText }) => {
       textTransform="capitalize"
     >
       <Box
+        pos="relative"
         opacity="0"
         className="arrow2"
         mr="0.2rem"
@@ -68,6 +69,7 @@ const ButtonOne = ({ buttonText }) => {
       />
       <Text>{buttonText}</Text>
       <Box
+        pos="relative"
         className="arrow"
         ml=".2rem"
         as={HiArrowNarrowRight}

@@ -43,6 +43,10 @@ const lastestProducts = () => {
     }
   });
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <Flex
       w="full"
@@ -63,7 +67,10 @@ const lastestProducts = () => {
                 cursor: "pointer",
                 transform: "translateY(-1rem) ",
               }}
-              onClick={() => setUniqueProduct(product)}
+              onClick={() => {
+                setUniqueProduct(product);
+                scrollToTop();
+              }}
               flexDir="column"
               color="gray.500"
             >
