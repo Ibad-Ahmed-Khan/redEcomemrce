@@ -108,19 +108,25 @@ const Cart = () => {
                   <Td>
                     <Flex align="center">
                       <Button
+                        color="#e65833"
+                        borderRadius="none"
                         onClick={() => handleCountDecrement(item.id)}
                         isDisabled={productCounts[item.id] <= 1}
                         size={{ base: "xs", md: "sm" }}
+                        fontWeight="bolder"
                       >
                         -
                       </Button>
                       <Text mx={2}>{productCounts[item.id] || 1}</Text>
                       <Button
+                        color="#e65833"
+                        borderRadius="none"
                         onClick={() => handleCountIncrement(item.id)}
                         isDisabled={
                           productCounts[item.id] === item.productAvailable
                         }
                         size={{ base: "xs", md: "sm" }}
+                        fontWeight="bolder"
                       >
                         +
                       </Button>

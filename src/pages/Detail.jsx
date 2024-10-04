@@ -136,7 +136,7 @@ const Detail = () => {
           <DropDown />
           <Flex align="center" justify="center" gap="1rem" pt="3rem">
             <ProductCount />
-            <RouterLink to="/cart">
+            <RouterLink to="/cart" onClick={() => handleCartArray()}>
               <ButtonOne buttonText="Add to Cart" />
             </RouterLink>
           </Flex>

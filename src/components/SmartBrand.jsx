@@ -30,7 +30,10 @@ const SmartBrand = () => {
       </Flex>
       <VStack align="start" spacing="4" p="4">
         <Text>Exusivley available on RedStore</Text>
-        <Heading fontWeight="bolder" fontSize="3rem">
+        <Heading
+          fontWeight="bolder"
+          fontSize={{ base: "2rem", md: "2rem", lg: "3rem" }}
+        >
           Smart Band 4
         </Heading>
         <Text>

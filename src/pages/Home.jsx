@@ -29,7 +29,7 @@ const Home = () => {
         columns={{ base: 1, md: 2, lg: 2 }}
         bgGradient="radial(white, pink.100)"
         minH="100vh"
-        paddingInline={{ base: "2rem", md: "2rem", lg: "4rem" }}
+        paddingInline={{ base: "1.5rem", md: "2rem", lg: "4rem" }}
         alignItems="center"
         justifyContent="end"
       >
@@ -38,7 +38,10 @@ const Home = () => {
           gap="1rem"
           w={{ base: "full", md: "full", lg: "80%" }}
         >
-          <Heading fontWeight="bolder" fontSize="3rem">
+          <Heading
+            fontWeight="bolder"
+            fontSize={{ base: "2rem", md: "2rem", lg: "3rem" }}
+          >
             Give your workout a new style!
           </Heading>
           <Text color="gray">
