@@ -16,6 +16,7 @@ import RelatedProduct from "../components/RelatedProduct";
 import ProductCount from "../components/ProductCount";
 
 import { Link as RouterLink } from "react-router-dom";
+import ButtonOne from "../components/ButtonOne";
 
 const Detail = () => {
   const { detailFirsImg, setDetailFirsImg, setUniqueProduct, handleCartArray } =
@@ -45,7 +46,6 @@ const Detail = () => {
 
   return (
     <SimpleGrid
-      border="3px solid red"
       bg="#fff"
       alignItems="center"
       justifyContent="center"
@@ -137,17 +137,7 @@ const Detail = () => {
           <Flex align="center" justify="center" gap="1rem" pt="3rem">
             <ProductCount />
             <RouterLink to="/cart">
-              <Button
-                w="10rem"
-                color="#fff"
-                bg="#e65833"
-                _hover={{ bg: "#e65833" }}
-                _active={{ bg: "#e63113", border: "none", outline: "none" }}
-                borderRadius="4rem"
-                onClick={() => handleCartArray()}
-              >
-                Add to Cart
-              </Button>
+              <ButtonOne buttonText="Add to Cart" />
             </RouterLink>
           </Flex>
           <Text
@@ -161,7 +151,20 @@ const Detail = () => {
           <Text>{product.productDetail}</Text>
         </VStack>
       </Flex>
-      <RelatedProduct />
+
+      <Flex
+        p="2rem"
+        minW="100vw"
+        flexDir="column"
+        align="center"
+        justifyContent="center"
+      >
+        <Flex w="full" align="center" justify="space-around">
+          <Text fontWeight="bolder">Related Products</Text>
+          <Text fontWeight="bolder">View More</Text>
+        </Flex>
+        <RelatedProduct />
+      </Flex>
     </SimpleGrid>
   );
 };

@@ -45,7 +45,7 @@ const Cards = () => {
     >
       <path
         d="M12 .587l3.668 7.568 8.332 1.197-6.038 5.658 1.428 8.321L12 18.897l-7.39 3.88 1.428-8.321-6.038-5.658 8.332-1.197L12 .587z"
-        stroke="gold" // Outline color
+        stroke="#e65833" // Outline color
         strokeWidth="2" // Outline thickness
       />
     </svg>
@@ -81,29 +81,29 @@ const Cards = () => {
                 lg: " 3rem",
                 xl: "3rem",
               }}
-              transform="translateY(0) rotate(0deg)"
+              transform="translateY(0)"
               transition="all .3s ease-in-out"
               _hover={{
                 cursor: "pointer",
-                transform: "translateY(-1rem) rotate(5deg) ",
+                transform: "translateY(-1rem) ",
               }}
             >
               <FaQuoteLeft
-                style={{ width: "24", height: "24", color: "gold" }}
+                style={{ width: "24", height: "24", color: "#e65833" }}
               />
               <Text>{item.cardText}</Text>
               <Flex style={{ display: "flex", gap: "6px" }}>
-                <FaStar style={{ color: "gold" }} />
-                <FaStar style={{ color: "gold" }} />
-                <FaStar style={{ color: "gold" }} />
-                <FaStar style={{ color: "gold" }} />
+                <FaStar style={{ color: "#e65833" }} />
+                <FaStar style={{ color: "#e65833" }} />
+                <FaStar style={{ color: "#e65833" }} />
+                <FaStar style={{ color: "#e65833" }} />
                 <OutlinedStar />
               </Flex>
               <Img
                 style={{ width: "4rem", height: "4rem", borderRadius: "50%" }}
                 src={item.img}
               />
-              <Text fontWeight="bold">{item.cardName}</Text>
+              <Text fontWeight="bolder">{item.cardName}</Text>
             </VStack>
           </Flex>
         ))}

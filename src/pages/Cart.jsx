@@ -17,6 +17,8 @@ import {
 import { useStore } from "../zustand/Store";
 import { useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { HiArrowNarrowRight } from "react-icons/hi";
+import ButtonOne from "../components/ButtonOne";
 
 const Cart = () => {
   const {
@@ -41,11 +43,11 @@ const Cart = () => {
     <Flex
       flexDir="column"
       align="center"
-      justify="center"
+      justify={{ base: "start", md: "start", lg: "center" }}
       w="full"
       minH="100vh"
       bg="#fff"
-      paddingBlock="2rem"
+      // paddingBlock="2rem"
     >
       {cartArray.length === 0 ? (
         <Text fontSize="xl">Your cart is empty.</Text>
@@ -195,15 +197,7 @@ const Cart = () => {
               <Tr>
                 <Td></Td>
                 <Td colSpan={2} textAlign="end">
-                  <Button
-                    color="#fff"
-                    bg="#e65833"
-                    borderRadius="7rem"
-                    _hover={{ bg: "#e65833" }}
-                    _active={{ color: "#e65833", bg: "#fff" }}
-                  >
-                    Proceed to checkout
-                  </Button>
+                  <ButtonOne buttonText="Proceed to checkout" />
                 </Td>
               </Tr>
             </Tbody>

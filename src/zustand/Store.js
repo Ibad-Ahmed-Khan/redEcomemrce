@@ -104,6 +104,10 @@ const useStore = create((set) => ({
             : 1,
       },
     })),
+
+  // All Buttons
+  buttonText: "",
+  setButtonText: (text) => set({ buttonText: text }),
 }));
 
 export { useStore };

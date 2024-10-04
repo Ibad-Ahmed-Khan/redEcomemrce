@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Contact from "./pages/Contact";
 import Cards from "./components/Cards";
+import SmartBrand from "./components/SmartBrand";
 import Footer from "./components/Footer";
 import Detail from "./pages/Detail";
 import { useStore } from "./zustand/Store";
@@ -27,9 +28,15 @@ function App() {
   // localStorage.setItem("test", JSON.stringify(data));
 
   return (
-    <Box w="100vw">
+    <Box
+      w={{ base: "100vw", md: "100vw", lg: "99vw" }}
+      fontFamily="Manrope, sans-serif"
+      fontOpticalSizing="auto"
+      fontWeight="<weight>" // Replace <weight> with the desired font weight (e.g., 400, 700)
+      fontStyle="normal"
+    >
       <BrowserRouter>
-        <Box bgGradient="radial(white, pink.100)">
+        <Box>
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
@@ -40,9 +47,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/detail" element={<Detail />} />
           </Routes>
-          {/* <Cards /> */}
           <Footer />
-          {/* <SmartBrand /> */}
         </Box>
       </BrowserRouter>
     </Box>

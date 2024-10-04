@@ -69,6 +69,12 @@ const Product = () => {
         {sortedProducts.map((product, index) => (
           <RouterLink key={product.id} to="/detail">
             <Flex
+              transform="translateY(0)"
+              transition="all .3s ease-in-out"
+              _hover={{
+                cursor: "pointer",
+                transform: "translateY(-1rem) ",
+              }}
               onClick={() => setUniqueProduct(product)}
               flexDir="column"
               color="gray.500"

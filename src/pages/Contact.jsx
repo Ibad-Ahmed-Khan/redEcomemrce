@@ -19,6 +19,7 @@ import {
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaMap } from "react-icons/fa";
 import { useState } from "react";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import ButtonOne from "../components/ButtonOne";
 
 const mapContainerStyle = {
   width: "100%",
@@ -86,7 +87,7 @@ const Contact = () => {
         boxShadow="lg"
         backdropFilter="blur(10px)"
       >
-        <Heading as="h2" size="xl" mb={6} textAlign="center" color="#2d3748">
+        <Heading as="h2" size="xl" mb={6} textAlign="center" color="#fff">
           Get in Touch
         </Heading>
         <form onSubmit={handleSubmit}>
@@ -144,25 +145,21 @@ const Contact = () => {
                 boxShadow: "0 0 0 1px #2C7A7B",
               }}
             />
-            <Button
-              colorScheme="teal"
-              size="lg"
-              type="submit"
-              boxShadow="md"
-              transition="background 0.2s"
-              _hover={{ bg: "#2C7A7B" }}
-            >
-              Send Message
-            </Button>
+            <ButtonOne buttonText="Send Message" />
           </VStack>
         </form>
         {/* Live Location Button */}
         <Button
           w="full"
           mt={4}
-          colorScheme="teal"
           onClick={getLocation}
           leftIcon={<FaMap />}
+          color="#fff"
+          bg="#e65833"
+          borderRadius="7rem"
+          _hover={{ bg: "#e65833" }}
+          _active={{ color: "#e65833", bg: "#fff" }}
+          textTransform="Capitalize"
         >
           Get Live Location
         </Button>

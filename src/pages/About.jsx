@@ -12,6 +12,7 @@ import {
   GridItem,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import ButtonOne from "../components/ButtonOne";
 
 const About = () => {
   return (
@@ -37,13 +38,7 @@ const About = () => {
             Our mission is to empower individuals and organizations through
             technology, creativity, and collaboration.
           </Text>
-          <Button
-            colorScheme="teal"
-            size="lg"
-            onClick={() => alert("Learn more!")}
-          >
-            Discover Our Journey
-          </Button>
+          <ButtonOne buttonText="Discover Our Journey" />
         </Box>
         <Image
           src="https://img.freepik.com/free-photo/happy-boy-with-adorable-smile_23-2149352352.jpg" // Replace with a relevant image
