@@ -53,8 +53,9 @@ function App() {
 
   return (
     <Box
-      w={{ base: "100vw", md: "100vw", lg: "99vw" }}
+      w={{ base: "100vw", md: "100vw", lg: "100vw" }}
       fontFamily="Manrope, sans-serif"
+      fontWeight="bold"
       fontStyle="normal"
     >
       <BrowserRouter>

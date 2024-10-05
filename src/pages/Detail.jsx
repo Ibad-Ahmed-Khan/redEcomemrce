@@ -140,7 +140,7 @@ const Detail = () => {
         >
           <Text>{product.productShortName}</Text>
           <Heading>{product.productName}</Heading>
-          <Text>{product.productPrice}</Text>
+          <Text>${product.productPrice}</Text>
           <DropDownTwo />
           <Flex align="center" justify="center" gap="1rem" pt="3rem">
             <ProductCount />

@@ -144,14 +144,14 @@ const Cart = () => {
                     <Text fontWeight="bold">Subtotal</Text>
                     <Text fontWeight="bold">
                       $
-                      {(
-                        cartArray.reduce(
+                      {cartArray
+                        .reduce(
                           (total, item) =>
                             total +
                             item.productPrice * (productCounts[item.id] || 1),
                           0
-                        ) + 10
-                      ).toFixed(2)}
+                        )
+                        .toFixed(2)}
                     </Text>
                   </Flex>
                 </Td>
