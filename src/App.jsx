@@ -11,14 +11,13 @@ import Detail from "./pages/Detail";
 import { useStore } from "./zustand/Store";
 import { useEffect, useState } from "react";
 import Cart from "./pages/Cart";
+import Loader from "./components/Loader"; // Make sure you import your Loader component
 
 function App() {
-  const { productList, data } = useStore();
-
-  // Initialize relatedProduct state
+  const { uniqueProduct, productList, data } = useStore();
   const [relatedProduct, setRelatedProduct] = useState([]);
+  const [loader, setLoader] = useState(true); // Add loader state
 
-  // Store `productList` and `data` in localStorage when the page loads
   useEffect(() => {
     if (productList.length) {
       localStorage.setItem("1", JSON.stringify(productList));
@@ -31,12 +30,12 @@ function App() {
     }
   }, [data]);
 
-  // Set related products or fallback to first 4 products
+  // related products or fallback to first 4 products
   useEffect(() => {
-    const uniqueProduct = JSON.parse(localStorage.getItem("uniqueProduct"));
+    const uniqueProductData = JSON.parse(localStorage.getItem("uniqueProduct"));
 
-    if (productList.length && uniqueProduct) {
-      const productIndex = uniqueProduct.id - 1; // Adjust for zero-based index
+    if (productList.length && uniqueProductData) {
+      const productIndex = uniqueProductData.id - 1; // Adjust for zero-based index
       const related = [];
       for (let i = 1; i <= 4; i++) {
         const nextIndex = (productIndex + i) % productList.length; // Wrap around using modulo
@@ -49,30 +48,35 @@ function App() {
       setRelatedProduct(firstFourProducts); // Set state
       localStorage.setItem("relatedProduct", JSON.stringify(firstFourProducts));
     }
-  }, [productList]); // Dependency on productList ensures it runs when products change
+    setLoader(false); // Hide loader after processing
+  }, [productList]);
 
   return (
     <Box
-      w={{ base: "100vw", md: "100vw", lg: "100vw" }}
+      w={{ base: "100vw", md: "100vw", lg: "99vw" }}
       fontFamily="Manrope, sans-serif"
       fontWeight="bold"
       fontStyle="normal"
     >
-      <BrowserRouter>
-        <Box>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/detail" element={<Detail />} />
-          </Routes>
-          <Footer />
-        </Box>
-      </BrowserRouter>
+      {loader ? (
+        <Loader />
+      ) : (
+        <BrowserRouter>
+          <Box>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/detail" element={<Detail />} />
+            </Routes>
+            <Footer />
+          </Box>
+        </BrowserRouter>
+      )}
     </Box>
   );
 }

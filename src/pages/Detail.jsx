@@ -90,7 +90,7 @@ const Detail = () => {
               maxH="6rem"
               objectFit="cover"
               src={product.detailImg1}
-              onClick={() => setDetailFirsImg(product?.detailImg1)} // Use Zustand setter
+              onClick={() => setDetailFirsImg(product?.detailImg1)}
             />
             <Img
               cursor="pointer"
@@ -100,7 +100,7 @@ const Detail = () => {
               maxH="6rem"
               objectFit="cover"
               src={product.detailImg2}
-              onClick={() => setDetailFirsImg(product?.detailImg2)} // Use Zustand setter
+              onClick={() => setDetailFirsImg(product?.detailImg2)}
             />
             <Img
               cursor="pointer"
@@ -110,7 +110,7 @@ const Detail = () => {
               maxH="6rem"
               objectFit="cover"
               src={product.detailImg3}
-              onClick={() => setDetailFirsImg(product?.detailImg3)} // Use Zustand setter
+              onClick={() => setDetailFirsImg(product?.detailImg3)}
             />
             <Img
               cursor="pointer"
@@ -120,7 +120,7 @@ const Detail = () => {
               maxH="6rem"
               objectFit="cover"
               src={product.detailImg4}
-              onClick={() => setDetailFirsImg(product?.detailImg4)} // Use Zustand setter
+              onClick={() => setDetailFirsImg(product?.detailImg4)}
             />
           </Flex>
         </Flex>

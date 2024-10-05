@@ -4,22 +4,11 @@ import { useStore } from "../zustand/Store";
 import { useEffect, useState } from "react";
 
 const DropDownTwo = () => {
-  const {
-    productList,
-    hover2,
-    handleHover2,
-    uniqueProduct,
-    sortOption2,
-    setSortOption2,
-  } = useStore();
-  const [name, setName] = useState("default");
-  // const productSizeArray = JSON.parse(localStorage.getItem("3"));
-
-  //   console.log(uniqueProduct);
-  const productArray = Object.values(uniqueProduct);
-  //   console.log(productArray);
-
-  console.log(uniqueProduct);
+  const { productList, hover2, handleHover2, sortOption2, setSortOption2 } =
+    useStore();
+  const [name, setName] = useState("Select Size");
+  const uniqueProduct = JSON.parse(localStorage.getItem("uniqueProduct"));
+  const productArray = Object.values(uniqueProduct?.productSize || {});
 
   return (
     <Box textTransform="capitalize">

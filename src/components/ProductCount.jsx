@@ -23,6 +23,10 @@ const productCount = () => {
     <Box>
       <Flex align="center">
         <Button
+          color="#e65833"
+          borderRadius="none"
+          fontWeight="bolder"
+          size={{ base: "xs", md: "sm" }}
           onClick={() => handleCountDecrement(uniqueId)}
           isDisabled={productCounts[uniqueId] <= 1}
         >
@@ -30,6 +34,10 @@ const productCount = () => {
         </Button>
         <Text mx={2}>{productCounts[uniqueId] || 1}</Text>
         <Button
+          color="#e65833"
+          borderRadius="none"
+          fontWeight="bolder"
+          size={{ base: "xs", md: "sm" }}
           onClick={() => {
             handleCountIncrement(uniqueId);
           }}

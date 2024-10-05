@@ -99,10 +99,10 @@ const Cart = () => {
                       <Button
                         color="#e65833"
                         borderRadius="none"
+                        fontWeight="bolder"
+                        size={{ base: "xs", md: "sm" }}
                         onClick={() => handleCountDecrement(item.id)}
                         isDisabled={productCounts[item.id] <= 1}
-                        size={{ base: "xs", md: "sm" }}
-                        fontWeight="bolder"
                       >
                         -
                       </Button>
