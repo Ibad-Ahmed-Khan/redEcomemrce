@@ -11,26 +11,28 @@ import Detail from "./pages/Detail";
 import { useStore } from "./zustand/Store";
 import { useEffect, useState } from "react";
 import Cart from "./pages/Cart";
-import Loader from "./components/Loader"; // Make sure you import your Loader component
+import Loader from "./components/Loader"; // Import your Loader component
 
 function App() {
   const { uniqueProduct, productList, data } = useStore();
   const [relatedProduct, setRelatedProduct] = useState([]);
-  const [loader, setLoader] = useState(true); // Add loader state
+  const [loader, setLoader] = useState(true); // Loader state
 
   useEffect(() => {
+    // Save productList to localStorage whenever it changes
     if (productList.length) {
       localStorage.setItem("1", JSON.stringify(productList));
     }
   }, [productList]);
 
   useEffect(() => {
+    // Save data to localStorage whenever it changes
     if (data.length) {
       localStorage.setItem("2", JSON.stringify(data));
     }
   }, [data]);
 
-  // related products or fallback to first 4 products
+  // Related products logic
   useEffect(() => {
     const uniqueProductData = JSON.parse(localStorage.getItem("uniqueProduct"));
 
@@ -41,15 +43,26 @@ function App() {
         const nextIndex = (productIndex + i) % productList.length; // Wrap around using modulo
         related.push(productList[nextIndex]);
       }
-      setRelatedProduct(related); // Set state with related products
+      setRelatedProduct(related);
       localStorage.setItem("relatedProduct", JSON.stringify(related));
     } else if (productList.length) {
       const firstFourProducts = productList.slice(0, 4); // Fallback to the first 4 products
-      setRelatedProduct(firstFourProducts); // Set state
+      setRelatedProduct(firstFourProducts);
       localStorage.setItem("relatedProduct", JSON.stringify(firstFourProducts));
     }
-    setLoader(false); // Hide loader after processing
+
+    // Set loader to false after processing related products
+    // setLoader(false);
   }, [productList]);
+
+  // Timer for loader duration
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoader(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Box
@@ -59,7 +72,7 @@ function App() {
       fontStyle="normal"
     >
       {loader ? (
-        <Loader />
+        <Loader /> // Render the loader
       ) : (
         <BrowserRouter>
           <Box>
